@@ -1,111 +1,181 @@
-# README - App Jokenpô
+🎮 App Jokenpo Mobile
+Um aplicativo Android simples e divertido desenvolvido em Java + XML no Android Studio, simulando o clássico jogo Pedra, Papel e Tesoura (Jokenpo).
+Projeto criado como parte dos estudos de desenvolvimento mobile nativo e personalização de interfaces Android.
 
-## 📱 Sobre o Projeto
 
-O **App Jokenpô** é uma aplicação Android desenvolvida em Java baseada no clássico jogo Pedra, Papel e Tesoura.
+🧠 Sobre o Projeto
+O Jokenpo Mobile é um app educacional voltado para o aprendizado de:
 
-O jogador escolhe uma opção e o aplicativo gera uma escolha aleatória automaticamente, exibindo o resultado da partida na tela.
+Estrutura básica de um projeto Android (Activities, Layouts e Drawables)
+Manipulação de imagens e componentes de interface
+Interação via eventos de clique (onClick)
+Lógica de programação (condicionais, aleatoriedade)
+Uso de Random para gerar jogadas automáticas do app
 
----
 
-## 🎮 Funcionalidades
+🛠️ Tecnologias Utilizadas
+Categoria
+Ferramenta
+IDE
+Android Studio
+Linguagem
+Java
+Layouts
+XML
+Versão mínima Android
+API 21 (Android 5.0 Lollipop)
+Estrutura de UI
+ConstraintLayout / LinearLayout
+Recursos gráficos
+Drawable Resources
 
-* Escolha entre:
 
-  * Pedra
-  * Papel
-  * Tesoura
 
-* Resultado automático:
+📱 Estrutura do Projeto
+app/
 
-  * Vitória
-  * Derrota
-  * Empate
+ ├── java/
 
-* Exibição da escolha do aplicativo através de imagens
+ │    └── br/ulbra/appjokenpo/
 
-* Sistema de placar:
+ │         └── MainActivity.java
 
-  * Pontuação do jogador
-  * Pontuação do aplicativo
+ ├── res/
 
-* Botão para reiniciar o jogo
+ │    ├── layout/
 
----
+ │    │     └── activity_main.xml
 
-## 🛠️ Tecnologias Utilizadas
+ │    ├── drawable/
 
-* Java
-* Android Studio
-* XML
-* ConstraintLayout / LinearLayout
+ │    │     ├── pedra.png
 
----
+ │    │     ├── papel.png
 
-## 📂 Estrutura do Projeto
+ │    │     ├── tesoura.png
 
-### Layout (`activity_main.xml`)
+ │    │     └── padrao.png
 
-O layout contém:
+ │    └── values/
 
-* `TextView` → título e resultado
-* `ImageView` → mostra a escolha do aplicativo
-* `Buttons` → Pedra, Papel, Tesoura e Reiniciar
-* `TextView` → placar do jogo
+ │          └── strings.xml
 
----
+ └── AndroidManifest.xml
 
-## 🖼️ Imagens Utilizadas
 
-Adicionar na pasta:
+🧩 Lógica do Jogo
+A classe MainActivity controla toda a lógica do jogo:
 
-```plaintext
-res/drawable
-```
+O jogador seleciona Pedra, Papel ou Tesoura.
+O aplicativo escolhe aleatoriamente uma das três opções.
+O resultado é exibido na tela através de um TextView e uma ImageView.
 
-As seguintes imagens:
+String opcoes[] = {"pedra", "papel", "tesoura"};
 
-```plaintext
-padrao.png
-pedra.png
-papel.png
-tesoura.png
-```
+String opcaoApp = opcoes[new Random().nextInt(3)];
 
----
+As comparações determinam o resultado final:
 
-## 💻 Lógica do Aplicativo
+Jogador vence 🏆
+App vence 💀
+Empate 😐
 
-O aplicativo:
 
-1. Recebe a escolha do jogador
-2. Gera uma escolha aleatória para o app
-3. Compara os resultados
-4. Exibe o vencedor
-5. Atualiza o placar automaticamente
+🧰 Estrutura XML
+O layout principal (activity_main.xml) contém:
 
----
+3 botões (Pedra, Papel, Tesoura)
+1 ImageView (escolha do app)
+1 TextView (resultado)
+1 TextView opcional para placar
 
-## 📌 Regras do Jogo
+Exemplo de uso do atributo onClick:
 
-* Pedra vence Tesoura
-* Tesoura vence Papel
-* Papel vence Pedra
+<Button
 
----
+    android:id="@+id/btnPedra"
 
-## 🚀 Funcionalidades Extras
+    android:onClick="selecionadoPedra"
 
-### ✅ Placar
+    android:text="Pedra"
 
-O jogo mantém a pontuação do jogador e do aplicativo.
+    android:layout_width="wrap_content"
 
-### ✅ Reiniciar Jogo
+    android:layout_height="wrap_content"/>
 
-O botão “Reiniciar” zera o placar e limpa a rodada atual.
 
----
+🏗️ Funcionalidades Implementadas
+✅ Escolha entre Pedra, Papel e Tesoura
+✅ Resultado exibido na tela
+✅ Exibição da imagem correspondente à jogada
+✅ Lógica completa de vitória, derrota e empate
+✅ Código limpo e comentado
 
-## 👨‍💻 Autor
 
-Projeto desenvolvido para fins de aprendizado em Desenvolvimento Mobile Android.
+🎯 Desafios Extras (para estudo)
+🔹 Desafio 1 – Placar
+Implemente um placar que registre as vitórias do jogador e do app.
+
+int pontuacaoJogador = 0;
+
+int pontuacaoApp = 0;
+
+Atualize o placar com:
+
+public void atualizarPlacar() {
+
+    TextView txtPlacar = findViewById(R.id.txtPlacar);
+
+    txtPlacar.setText("Jogador: " + pontuacaoJogador + " - App: " + pontuacaoApp);
+
+}
+🔹 Desafio 2 – Botão "Reiniciar"
+Adicione um botão para reiniciar o jogo:
+
+public void reiniciarJogo() {
+
+    pontuacaoJogador = 0;
+
+    pontuacaoApp = 0;
+
+    atualizarPlacar();
+
+    ImageView imageResultado = findViewById(R.id.imgApp);
+
+    imageResultado.setImageResource(android.R.color.transparent);
+
+}
+
+
+💡 Possíveis Melhorias
+Animações de transição entre jogadas
+Efeitos sonoros e vibração no resultado
+Customização visual (gradientes, bordas arredondadas, sombras)
+Suporte a temas claro/escuro
+Implementar navegação entre telas (Fragments ou múltiplos XMLs)
+
+
+📸 Demonstração (sugestão)
+Adicione aqui prints ou GIFs mostrando o funcionamento do app:
+
+📷 Screenshot 1 – Tela inicial
+
+📷 Screenshot 2 – Jogada e resultado
+
+
+👩‍💻 Autor / Equipe
+Nome: Camille Ferreira Brito
+Instituição: Curso Técnico em Informática – Ulbra São Lucas
+Disciplina: Desenvolvimento Mobile Android
+Professor: Jefferson
+
+
+📚 Licença
+Este projeto foi desenvolvido para fins educacionais.
+Você pode modificar, reutilizar e distribuir livremente o código, mantendo os devidos créditos.
+
+
+🚀 Let's Code!
+"A melhor forma de aprender é construindo. Então... bora codar!"
+
+to Mobile Android.
